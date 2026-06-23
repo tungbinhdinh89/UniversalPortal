@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Scalar.AspNetCore;
 using UniversalPortal.Application.Interfaces;
 using UniversalPortal.Application.Services;
+using UniversalPortal.Infra;
 using UniversalPortal.Infra.Db;
 using UniversalPortal.Infra.Services;
 
@@ -14,17 +15,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.Configure<ApplicationSetting>(builder.Configuration.GetSection("ApplicationSetting"));
-// var applicationSetting = builder.Configuration.GetSection("ApplicationSetting").Get<ApplicationSetting>();
 
-builder.Services.AddDbContext<ApplicationDbContext>((sp, options) =>
-{
-    var applicationSetting = sp.GetRequiredService<IOptions<ApplicationSetting>>().Value;
-
-    options.UseSqlServer(applicationSetting.DbConnectionString);
-});
-builder.Services.AddScoped<IStudentService, StudentService>();
-
+builder.Services.AddInfraServices(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

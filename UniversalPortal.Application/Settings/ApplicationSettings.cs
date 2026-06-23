@@ -6,6 +6,8 @@ namespace UniversalPortal.Application.Services
 {
     public class ApplicationSetting
     {
-        public string DbConnectionString { get; set; } = null!;
+        public const string SectionName = "ApplicationSetting";
+
+        public string? ConnectionString { get; set; }
     }
 }
