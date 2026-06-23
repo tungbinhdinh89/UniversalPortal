@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="UniversalPortal.API/UniversalPortal.API.csproj" Id="f570581a-3ff5-4528-8125-f98ea11d126c" />
+  <Project Path="UniversalPortal.Application/UniversalPortal.Application.csproj" Id="2c7cc3de-9381-4145-9890-a4e83c549e7b" />
+  <Project Path="UniversalPortal.Infra/UniversalPortal.Infra.csproj" Id="128818a4-aa5e-4295-9f69-2f00f2d5ff37" />
+</Solution>
