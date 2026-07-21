@@ -16,7 +16,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 
-builder.Services.AddInfraServices(builder.Configuration);
+builder.Services.AddInfraServices(builder.Configuration)
+                .AddMasterTenantServices(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
