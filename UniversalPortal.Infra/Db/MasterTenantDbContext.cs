@@ -8,7 +8,7 @@ namespace UniversalPortal.Infra.Db
 {
     public class MasterTenantDbContext(DbContextOptions<MasterTenantDbContext> options) : DbContext(options)
     {
-        public DbSet<MasterTenant> DbSet { get; set; }
+        public DbSet<MasterTenant> MasterTenants{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
