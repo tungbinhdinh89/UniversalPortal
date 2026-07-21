@@ -19,5 +19,17 @@ namespace UniversalPortal.Infra
             });
             return services;
         }
+
+        // add master tenant setting
+        public static IServiceCollection AddMasterTenantServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<MasterTenantSetting>(configuration.GetSection(MasterTenantSetting.SectionName));
+            services.AddDbContext<MasterTenantDbContext>((sp, options) =>
+            {
+                var masterTenantSettings = sp.GetRequiredService<IOptions<MasterTenantSetting>>().Value;
+                options.UseSqlServer(masterTenantSettings.ConnectionString);
+            });
+            return services;
+        }
     }
 }
