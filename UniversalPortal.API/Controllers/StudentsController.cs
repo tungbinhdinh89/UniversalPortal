@@ -6,11 +6,12 @@ namespace UniversalPortal.API.Controllers
 {
         [ApiController]
         [Route("api/[controller]")] // http://localhost:5000/api/students
-        public class StudentsController(IStudentService studentService) : ControllerBase
+        public class StudentsController(IStudentService studentService, MyStore store) : ControllerBase
         {
             [HttpGet]
             public async Task<IActionResult> GetAllStudents()
             {
+            store.MyName = "John";
                 var students = await studentService.GetStudentListAsync();
                 return Ok(students);
             }

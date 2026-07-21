@@ -11,6 +11,11 @@ namespace UniversalPortal.Application.MasterTenant.Entities
         [Required]
         [MaxLength(100)]
         public string TenantName { get; set; } = null!;
+
+        [Required]
+        [MaxLength(100)]
+        public string DbName { get; set; } = null!;
+
         [Required]
         [MaxLength(50)]
         public string TenantCode { get; set; } = null!;

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using UniversalPortal.Application.Interfaces;
 using UniversalPortal.Application.Services;
 using UniversalPortal.Infra.Db;
 
@@ -14,8 +15,12 @@ namespace UniversalPortal.Infra
             services.Configure<ApplicationSetting>(configuration.GetSection(ApplicationSetting.SectionName));
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
+                var masterService = sp.GetRequiredService<IMasterService>();
+                var tenantResolver = sp.GetRequiredService<ITenantIdResolver>();
+                var tenant = masterService.GetTenantInfoAsync(tenantResolver.ResolveId()).GetAwaiter().GetResult();
                 var appSettings = sp.GetRequiredService<IOptions<ApplicationSetting>>().Value;
-                options.UseSqlServer(appSettings.ConnectionString);
+                var connectionString = appSettings.ConnectionString.Replace("@@db", tenant.DbName) ?? null;
+                options.UseSqlServer(connectionString);
             });
             return services;
         }

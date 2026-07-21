@@ -9,10 +9,11 @@ using UniversalPortal.Application.Entities;
 
 namespace UniversalPortal.Infra.Services
 {
-    public class StudentService(ApplicationDbContext dbContext) : IStudentService
+    public class StudentService(ApplicationDbContext dbContext, MyStore store) : IStudentService
     {
         public async Task<List<StudentDTO>> GetStudentListAsync()
         {
+            var name = store.MyName;
             var students = await dbContext.Students
                 .Select(s => new StudentDTO
                 {

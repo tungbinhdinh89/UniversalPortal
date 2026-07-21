@@ -1,10 +1,7 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Scalar.AspNetCore;
+using UniversalPortal.API;
 using UniversalPortal.Application.Interfaces;
-using UniversalPortal.Application.Services;
 using UniversalPortal.Infra;
-using UniversalPortal.Infra.Db;
 using UniversalPortal.Infra.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +12,9 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-
 builder.Services.AddInfraServices(builder.Configuration)
-                .AddMasterTenantServices(builder.Configuration);
+                .AddMasterTenantServices(builder.Configuration)
+                .AddWebServices(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

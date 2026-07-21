@@ -15,6 +15,7 @@ namespace UniversalPortal.Infra.Db
             builder.HasKey(x => x.TenantId);
             builder.HasIndex(x => x.TenantName).IsUnique().HasDatabaseName("IX_Tenant_Name");
             builder.HasIndex(x => x.TenantCode).IsUnique().HasDatabaseName("IX_Tenant_Code");
+            builder.HasIndex(x => x.DbName).IsUnique().HasDatabaseName("IX_Tenant_DbName");
         }
     }
 }
